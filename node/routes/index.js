@@ -1,16 +1,23 @@
 var express = require('express');
-var getPeople = require('../repository/people');
+var People = require('../repository/people');
 
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  const content = {
-    title: 'Full Cycle Rocks!', 
-    people: getPeople()
-  }
+  People.findAll(function(err, rows) {
+    if (err) {
+      res.send(err)
+      return
+    }
 
-  res.render('index', content);
+    const content = {
+      title: 'Full Cycle Rocks!',
+      people: rows.map( item => item.name )
+    }
+
+    res.render('index', content);
+  })
 });
 
 module.exports = router;
