@@ -15,7 +15,14 @@ router.get('/', function(req, res, next) {
 
 /* POST people listing. */
 router.post('/', function(req, res, next) {
-  res.send('respond with a resource');
+  console.log(req.body.name)
+  People.create(req.body.name, (err, insertId) => {
+    if (err)
+      res.send(err)
+    else
+      res.send(`Inserted ${req.body.name}`);
+  })
+  
 });
 
 module.exports = router;

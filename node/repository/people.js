@@ -5,7 +5,7 @@ var People = function(people) {
 }
 
 People.create = function(name, result) {
-    connection.query(`INSERT INTO people (name) VALUES (${name});`, function (err, res) {
+    connection.query(`INSERT INTO people (name) VALUES ('${name}');`, function (err, res) {
         if(err) {
             console.log(`insert error: ${err}`);
             result(err, null);
