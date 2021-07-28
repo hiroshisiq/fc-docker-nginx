@@ -6,8 +6,6 @@ services:
     container_name: web
     volumes:
       - ./node:/usr/src/app
-    ports: 
-      - 3000:3000
     depends_on:
       - db
 
@@ -18,4 +16,13 @@ services:
     volumes: 
       - ./mysql/data:/var/lib/mysql
     command: --default-authentication-plugin=mysql_native_password
+
+  proxy:
+    image: nginx:1.21.1-alpine
+    container_name: proxy-nginx
+    restart: always
+    ports: 
+      - 8080:80
+    volumes:
+      - ./nginx:/etc/nginx/conf.d/
     
