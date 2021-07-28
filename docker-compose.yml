@@ -2,11 +2,20 @@ version: "3"
 
 services:
   web:
-    image: node:16.5.0-alpine
+    build: node
     container_name: web
-    working_dir: /usr/src/app
     volumes:
       - ./node:/usr/src/app
     ports: 
       - 3000:3000
-    command: tail -f /dev/null
+    depends_on:
+      - db
+
+  db: 
+    build: mysql
+    container_name: mysql-db
+    restart: always
+    volumes: 
+      - ./mysql/data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    
