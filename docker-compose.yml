@@ -2,16 +2,14 @@ version: "3"
 
 services:
   web:
-    image: node:16.5.0-alpine
+    build: node
     container_name: web
-    working_dir: /usr/src/app
     volumes:
       - ./node:/usr/src/app
     ports: 
       - 3000:3000
     depends_on:
       - db
-    command: tail -f /dev/null
 
   db: 
     build: mysql
