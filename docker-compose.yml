@@ -9,4 +9,15 @@ services:
       - ./node:/usr/src/app
     ports: 
       - 3000:3000
+    depends_on:
+      - db
     command: tail -f /dev/null
+
+  db: 
+    build: mysql
+    container_name: mysql-db
+    restart: always
+    volumes: 
+      - ./mysql/data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    
