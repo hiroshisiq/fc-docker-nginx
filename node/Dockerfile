@@ -15,6 +15,6 @@ RUN npm install
 
 EXPOSE 3000
 
-ENTRYPOINT [ "dockerize", "-wait", "tcp://db:3306" ]
+ENTRYPOINT [ "dockerize", "-wait", "tcp://db:3306", "-timeout", "60s" ]
 
 CMD [ "npm", "run", "start" ]
