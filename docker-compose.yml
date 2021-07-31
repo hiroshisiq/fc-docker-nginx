@@ -6,10 +6,9 @@ services:
     container_name: web
     volumes:
       - ./node:/usr/src/app
+      - /usr/src/app/node_modules
     depends_on:
       - db
-    ports:
-      - 3000
 
   db: 
     build: mysql
